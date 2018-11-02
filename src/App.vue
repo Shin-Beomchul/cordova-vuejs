@@ -1,17 +1,13 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
-    <login></login>
     <router-view/>
   </div>
 </template>
 
 <script>
-
-import login from '@/components/Login'
 export default {
-  name: 'App',
-  component: login
+  name: 'App'
 }
 </script>
 

@@ -50,5 +50,5 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, '../www/dist'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '',
- }
+}
 }

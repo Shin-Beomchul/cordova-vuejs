@@ -1,6 +1,6 @@
-# y
+# vueapp
 
-> https://itnext.io/make-hybrid-platform-cordova-vue-webpack-2fb7031c4f9b
+> Vue-webpack-cordova
 
 ## Build Setup
 
