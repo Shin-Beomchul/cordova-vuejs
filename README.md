@@ -120,6 +120,9 @@ cordova run android
 
 # #삽질 꿀팁#
 
+# 파일 수정 할려고하면 자꾸 권한없다고 한다. 
+sudo chown -R [you] {projectRoot}
+
 # ignore 대상
 : node_modules ==  npm run build
 : platforms == 땡겨받고 $ cordova platform add {yourFlatform}
