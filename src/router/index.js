@@ -6,7 +6,9 @@ import Login from '@/components/Login'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  /* if App : hash
+  *     web : history */
+  mode: 'hash',
   routes: [
     {
       path: '/',
