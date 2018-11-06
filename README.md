@@ -1,8 +1,17 @@
 ---
-title: cordova
+title: SPA With cordova + Vue.js + webpack + Vuetify
 date: 2018-11-01 10:54:12
 tags:
 ---
+# TL;DR
+ - Cordova SPA App의 한계는 초기로딩 속도를 제외하고 WebApp을 넘어설 수 없다.
+ - Native WebView App VS Cordova WebView App은 성능상 완전히 동일
+ - SPA는 웹으로 다운받는 프로그램(Single Page == 어플리케이션)
+ - Cordova + SPA : Single Page를 App이 가지고 있어 초기 로딩 속도가 빠름.
+ - SPA web서비스가 있고 App으로의 전환시 타 방법에 비해 가장 쉽다.(ReactNative, Native App)
+   단, SPA가 아니라 일반 Page요청 기반의 Web이라면 Controller부분을 App에서 개발 필요
+ 
+
 
 # Cordova 패키지 매니져 설치
 ~~~
@@ -114,18 +123,19 @@ cordova run android
  - Step3. cordova run android 
 
 
-
+# +  Vue빌드 & App Install 쉘스크립트 추가.
+~~~
+sudo sh rr.sh a // android
+sudo sh rr.sh i // ios 
+~~~
  
 
 
 # #삽질 꿀팁#
 
-# 파일 수정 할려고하면 자꾸 권한없다고 한다. 
-sudo chown -R [you] {projectRoot}
-
 # ignore 대상
 : node_modules ==  npm run build
-: platforms == 땡겨받고 $ cordova platform add {yourFlatform}
+: platforms == 땡겨받고 $ cordovasub platform add {yourFlatform}
 
 
 # live 서버 :  npm run dev 
@@ -140,8 +150,16 @@ sudo chown -R [you] {projectRoot}
  
  해결 :  https://github.com/ios-control/ios-deploy/issues/346
 
+# cordova (App)에서 mode: history하면 최초 컴포넌트를 불러오지 못한다.
+https://www.npmjs.com/package/vue-cli-plugin-cordova
 
+https://forum.quasar-framework.org/topic/726/history-mode-for-web-and-not-for-cordova/11 
 
+#cordova 최초시작 페이지 설정
+config/config.xml
+  <!--<content src="dist/index.html" />-->
+
+#
 
 출처 
 폰트 관련 : https://medium.com/@valeriocapogna/how-to-setup-a-cordova-app-using-vue-js-8ba1315b9666
