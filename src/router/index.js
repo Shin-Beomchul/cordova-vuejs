@@ -1,10 +1,10 @@
 import Vue from 'vue'
-import Vuetify from 'vuetify'
 import Router from 'vue-router'
 import Home from '@/components/Home'
 import Login from '@/components/Login'
+import Rx from '@/components/Rx'
+import Jstutorial from '@/components/JsTutorial'
 
-Vue.use(Vuetify)
 Vue.use(Router)
 
 export default new Router({
@@ -21,6 +21,16 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/rx',
+      name: 'rx',
+      component: Rx
+    },
+    {
+      path: '/jsBasic',
+      name: 'jsBasic',
+      component: Jstutorial
     }
 
   ]

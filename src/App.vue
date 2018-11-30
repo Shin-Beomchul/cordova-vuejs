@@ -6,16 +6,20 @@
         app
         :clipped-left="clipped"
       >
+
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-        <v-toolbar-title v-text="title"></v-toolbar-title>
+        <router-link to="/">
+        <v-toolbar-title v-text="title">  </v-toolbar-title>
+        </router-link>
         <v-spacer></v-spacer>
+        <router-link to="/Login">로그인(Routing)</router-link>
 
       </v-toolbar>
 
-      <!--Content -->
-      <v-content>
-        <router-view/>
-      </v-content>
+    <!--Content -->
+    <v-content>
+      <router-view/>
+    </v-content>
 
     <!--GNB -->
     <v-navigation-drawer
@@ -40,21 +44,28 @@
 
       <v-list>
         <v-expansion-panel>
-          <v-expansion-panel-content v-for="(item, i) in items"
-                                     :key="i" ripple expand="true">
+          <v-expansion-panel-content v-for="(parentItem, i) in items" :key="i" ripple expand="true">
+
+            <!--parent-->
             <div slot="header">
-              <div>{{item.title}}</div>
+              <div>{{parentItem.title}}</div>
             </div>
-            <v-list>
-              <template v-for="(item, i) in items">
-                <v-divider v-if="item.divider" :key="i"></v-divider>
-                <v-list-tile  class="grey lighten-3" v-else :key="item.title">
-                  <v-list-tile-action>
-                    <v-icon>{{ item.icon }}</v-icon>
-                  </v-list-tile-action>
-                  <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                </v-list-tile>
+
+            <v-list v-if="parentItem.childItem">
+              <!--child-->
+
+              <template v-for="(item, i) in parentItem.childItem">
+                <router-link :to="item.routePath">
+                  <v-divider v-if="item.divider" :key="i"></v-divider>
+                  <v-list-tile  class="grey lighten-3" v-else :key="item.title">
+                    <v-list-tile-action>
+                      <v-icon>{{ item.icon }}</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                  </v-list-tile>
+                </router-link>
               </template>
+
             </v-list>
           </v-expansion-panel-content>
         </v-expansion-panel>
@@ -71,26 +82,39 @@ export default {
       clipped: false,
       drawer: false,
       fixed: false,
-      items: [{
-        icon: 'bubble_chart',
-        title: 'Home'
-      },
-      {
-        icon: 'bubble_chart',
-        title: '동영상'
-      },
-      {
-        icon: 'bubble_chart',
-        title: '포럼'
-      },
-      {
-        icon: 'bubble_chart',
-        title: '자유게시판'
-      },
-      {
-        icon: 'bubble_chart',
-        title: 'Q&A'
-      }],
+      items: [
+        // JS turtorial
+        {
+          icon: 'bubble_chart',
+          title: 'JS-Tutorial',
+          divider: false,
+          childItem: [{
+            icon: 'bubble_chart',
+            title: '1.basic',
+            routePath: 'jsBasic'
+          },
+          {
+            icon: 'bubble_chart',
+            title: '동영상-Operation',
+            routePath: 'jsBasic'
+          }]
+        },
+        // RX
+        {
+          icon: 'bubble_chart',
+          title: 'RxJs',
+          divider: false,
+          childItem: [{
+            icon: 'bubble_chart',
+            title: 'Rx-wiki백과사전',
+            routePath: 'rx'
+
+          },
+          {
+            icon: 'bubble_chart',
+            title: 'Rx-Operation'
+          }]
+        }],
       miniVariant: false,
       right: true,
       rightDrawer: false,
@@ -100,3 +124,7 @@ export default {
   name: 'App'
 }
 </script>
+
+<style scoped>
+
+</style>

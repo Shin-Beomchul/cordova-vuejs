@@ -9,7 +9,7 @@ export default {
   name: 'Login',
   data () {
     return {
-      msg: '로그인 페이지'
+      msg: '로그인 페이지 Component'
     }
   }
 }
