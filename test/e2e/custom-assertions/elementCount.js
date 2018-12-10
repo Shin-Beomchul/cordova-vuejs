@@ -1,10 +1,10 @@
-// A custom Nightwatch assertion.
+// A webget Nightwatch assertion.
 // The assertion name is the filename.
 // Example usage:
 //
 //   browser.assert.elementCount(selector, count)
 //
-// For more information on custom assertions see:
+// For more information on webget assertions see:
 // http://nightwatchjs.org/guide#writing-custom-assertions
 
 exports.assertion = function (selector, count) {

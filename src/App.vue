@@ -17,7 +17,7 @@
       </v-toolbar>
 
     <!--Content -->
-    <v-content>
+    <v-content >
       <router-view/>
     </v-content>
 
@@ -53,9 +53,8 @@
 
             <v-list v-if="parentItem.childItem">
               <!--child-->
-
               <template v-for="(item, i) in parentItem.childItem">
-                <router-link :to="item.routePath">
+                <router-link :to="item.routePath" v-bind:key="item">
                   <v-divider v-if="item.divider" :key="i"></v-divider>
                   <v-list-tile  class="grey lighten-3" v-else :key="item.title">
                     <v-list-tile-action>
@@ -86,39 +85,62 @@ export default {
         // JS turtorial
         {
           icon: 'bubble_chart',
-          title: 'JS-Tutorial',
+          title: 'JS - Tutorial',
           divider: false,
+          // JS - Sub
           childItem: [{
             icon: 'bubble_chart',
             title: '1.basic',
-            routePath: 'jsBasic'
-          },
-          {
-            icon: 'bubble_chart',
-            title: '동영상-Operation',
             routePath: 'jsBasic'
           }]
         },
         // RX
         {
           icon: 'bubble_chart',
-          title: 'RxJs',
+          title: 'RxJs - Tutorial',
           divider: false,
+          // Rx - sub
           childItem: [{
             icon: 'bubble_chart',
-            title: 'Rx-wiki백과사전',
+            title: 'RxWiki-Scaffolding',
             routePath: 'rx'
-
           },
           {
             icon: 'bubble_chart',
-            title: 'Rx-Operation'
+            title: 'RxWiki-Zip',
+            routePath: 'rxZip'
           }]
-        }],
+        },
+        // Vue
+        {
+          icon: 'bubble_chart',
+          title: 'Vue - Tutorial',
+          divider: false,
+          // Vue - sub
+          childItem: [{
+            icon: 'bubble_chart',
+            title: 'WatchComputed',
+            routePath: 'wc'
+          },
+          { icon: 'bubble_chart',
+            title: 'todoPureJS',
+            routePath: 'todoPure'
+          },
+          { icon: 'bubble_chart',
+            title: 'todoVueJS',
+            routePath: 'todoVue'
+          },
+          { icon: 'bubble_chart',
+            title: 'todoGroup',
+            routePath: 'todoGroup'
+          }
+          ]
+        }
+      ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'God'
+      title: 'BeomApp'
     }
   },
   name: 'App'
