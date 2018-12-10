@@ -5,16 +5,17 @@
       :class="{bold: isFolder}"
       @click="toggle">
       {{model.name}}
-      <span v-if="isFolder">[{{open ? '-' : '+'}}]</span>
+      <span v-if="isFolder">[{{model.isOpen ? '-' : '+'}}]</span>
     </div>
     <!--childs-->
-    <ul v-show="open" v-if="isFolder">
-      <tree
+    <ul v-show="model.isOpen" v-if="isFolder">
+        <tree
         class="item"
         v-for="model in model.children"
         :model="model">
       </tree>
-      <li class="add" @click="addChild">+</li>
+
+      <!--<li class="add" @click="addChild">+</li>-->
       <li class="add" @click="addChildGroup">+g+</li>
     </ul>
   </div>
@@ -28,7 +29,7 @@ export default {
   },
   data: function () {
     return {
-      open: false // 외부로 뺄것.
+      open: true
     }
   },
 
@@ -39,17 +40,14 @@ export default {
     }
   },
   methods: {
+
     toggle: function () {
       if (this.isFolder) {
-        this.open = !this.open
+        alert('group ' + this.model.name)
+        this.model.isOpen = !this.model.isOpen
+      }else{
+        alert('just ' + this.model.name)
       }
-    },
-    changeType: function () {
-      // if (!this.isFolder) {
-      //   Vue.set(this.model, 'children', [])
-      //   this.addChild()
-      //   this.open = true
-      // }
     },
     addChild: function () {
       this.model.children.push({
@@ -58,9 +56,11 @@ export default {
     },
     addChildGroup: function () {
       this.model.children.push({
+        isOpen: false,
         name: 'child folder',
         children: [
           {
+            isOpen: false,
             name: 'child folder',
             children: [
               {name: 'hello'},
@@ -70,6 +70,7 @@ export default {
           {name: 'hello'},
           {name: 'wat'},
           {
+            isOpen: false,
             name: 'child folder',
             children: [
               {name: 'hello'},

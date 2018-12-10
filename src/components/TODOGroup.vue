@@ -3,7 +3,7 @@
   <div>
     <tree
     class="item"
-    :model="treeData">
+    :model="apiData">
     </tree>
   </div>
 
@@ -17,6 +17,7 @@ export default {
   data () {
     return {
       apiData: {name: 'ohAPI'},
+
       treeData: {
         name: 'My Tree',
         children: [
@@ -53,9 +54,21 @@ export default {
       this.$http.get('http://192.168.22.94:10080/api/orginfo/' + com + '/stdproc', {
       })
         .then((result) => {
-          console.log('source :: ')
           console.log(result.data)
-          this.apiData = result.data
+
+          var tree = {}
+          var children = []
+          for (let data of result.data) {
+            children.push({
+              name: data.orgName
+            })
+          }
+
+          tree.isOpen = true
+          tree.name = com
+          tree.children = children
+          console.log(tree)
+          this.apiData = tree
         })
     }
   },
