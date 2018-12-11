@@ -3,7 +3,7 @@
   <div>
     <tree
     class="item"
-    :model="apiData">
+    :model="treeData">
     </tree>
   </div>
 
@@ -16,17 +16,18 @@ export default {
 
   data () {
     return {
-      apiData: {name: 'ohAPI'},
 
       treeData: {
+        isOpen: true,
         name: 'My Tree',
         children: [
           {name: 'hello'},
           {name: 'wat'},
           {
+            isOpen: true,
             name: 'child folder',
             children: [
-              {
+              { isOpen: true,
                 name: 'child folder',
                 children: [
                   {name: 'hello'},
@@ -36,6 +37,7 @@ export default {
               {name: 'hello'},
               {name: 'wat'},
               {
+                isOpen: true,
                 name: 'child folder',
                 children: [
                   {name: 'hello'},
@@ -50,6 +52,31 @@ export default {
     }
   },
   methods: {
+    loadGnb () {
+      this.$http.get('http://192.168.22.94:10080/api/orginfo/member/nodes/OSSTEM/0000', {
+      })
+        .then((result) => {
+          console.log('source :: ')
+          console.log(result.data)
+          this.apiData = result.data
+        })
+    },
+
+    // let nextGroupOrCdGroup = this.groupBy(nextGroups, org => org.orgCd)
+    groupBy (list, keyGetter) {
+      const map = new Map()
+      list.forEach((item) => {
+        const key = keyGetter(item)
+        const collection = map.get(key)
+        if (!collection) {
+          map.set(key, [item])
+        } else {
+          collection.push(item)
+        }
+      })
+      return map
+    },
+
     loadSurfaceTree (com) {
       this.$http.get('http://192.168.22.94:10080/api/orginfo/' + com + '/stdproc', {
       })
@@ -74,7 +101,7 @@ export default {
   },
 
   mounted () {
-    this.loadSurfaceTree('OSSTEM')
+    this.loadGnb('OSSTEM')
   }
 }
 </script>
