@@ -3,6 +3,7 @@
 
     <!--toolbar -->
       <v-toolbar
+        color="teal lighten-3"
         app
         :clipped-left="clipped"
       >

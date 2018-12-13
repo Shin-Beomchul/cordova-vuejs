@@ -8,7 +8,7 @@ import Vuetify from 'vuetify'
 import VueRx from 'vue-rx'
 import axios from 'axios'
 
-import item from './components/webget/item'
+import tree from './components/webget/treeNode'
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
@@ -16,8 +16,7 @@ Vue.prototype.$http = axios
 Vue.use(Vuetify)
 Vue.use(VueRx)
 
-
-Vue.component('tree', item)
+Vue.component('treeNode', tree)
 
 /* eslint-disable no-new */
 new Vue({
