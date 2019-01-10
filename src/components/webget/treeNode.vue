@@ -23,7 +23,7 @@
     <!--childs-->
     <ul v-show="isOpen" v-if="isFolder">
 
-      <!-- childs Node -->
+      <!-- childs group -->
       <treeNode
         class="item"
         v-for="model in model.children"
@@ -44,7 +44,7 @@
           height="30" >
 
             <v-icon small color="purple darken-2">dialpad</v-icon>
-            {{model.name}}
+            {{model.name}}{{ '(' + model.jikgubName + ')'}}
 
         </v-card>
       </v-list-tile>

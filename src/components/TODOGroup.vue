@@ -60,7 +60,7 @@ export default {
 
       // find Root
       for (var i = 0, len = orgInfoList.length; i < len; ++i) {
-        var orginfo = orgInfoList[i]
+        let orginfo = orgInfoList[i]
         var upperCd = orginfo.orgUpperCd // 부모가 있냐
         var target = upperCd === '0000' ? roots //  id가 0000이면 target은 최상위 root
           : (children[upperCd] || (children[upperCd] = []))
@@ -71,18 +71,26 @@ export default {
       var findChildren = function (parent) {
         if (children[parent.name.orgCd]) { // 자식이 있으면
           parent.children = children[parent.name.orgCd]
-          console.log(parent.name.orgName + '++++')
           for (var i = 0, len = parent.children.length; i < len; ++i) {
             findChildren(parent.children[i])
           }
         } else {
-          console.log(parent.name.orgName + 'end + ')
           let endNodeChilds = orgMemberInfoList.filter(e => e.orgCd === parent.name.orgCd)
           for (var ie = 0, lenE = endNodeChilds.length; ie < lenE; ++ie) {
             endNodeChilds[ie].isEndNode = true
           }
+
+          endNodeChilds.sort(function (a, b) {
+            if (a.jikgubCd > b.jikgubCd) {
+              return 1
+            }
+            if (a.jikgubCd < b.jikgubCd) {
+              return -1
+            }
+            // a must be equal to b
+            return 0
+          })
           parent.children = endNodeChilds
-          console.log(parent.children)
         }
       }
 
@@ -96,8 +104,9 @@ export default {
     async loadGnb () {
       await this.$http.get('http://13.209.102.254:10080/api/orginfo/member/nodes/OSSTEM/0000', {})
         .then((result) => {
-          this.buildMyTree(result.data)
           this.dialog = false
+          this.buildMyTree(result.data)
+
         })
     }
   }

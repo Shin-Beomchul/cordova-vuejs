@@ -126,15 +126,12 @@ export default {
       alert('watchData 변경')
     }
   },
-  // data가 변경 될 경우만 호출/연산/호출
   computed: {
-
-    computedDataCalc: function () {
-      alert('calcing...')
+    computedDataCalc () {
+      alert('computedData 변경 감지 재계산')
       return this.computedData + ' date: ' + Date.now()
     }
   },
-
   methods: {
     updateWatch () {
       this.watcgData += 3
@@ -143,6 +140,7 @@ export default {
       this.computedData += 3
     },
     getComputedData () {
+      alert('computedData가 변경되지 않았으므로 캐싱 데이터반환')
       return this.computedDataCalc
     },
     updateRx () {
